@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { fetchQuiz } from '../src/quizApi';
+import { fetchQuiz } from '../Api/quizAPI';
 
 import Quiz from "../pages/Quiz";
 import QuizOptions from "../components/QuizOptions";

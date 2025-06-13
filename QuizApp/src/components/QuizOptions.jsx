@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fetchCategories } from '../src/quizApi';
+import { fetchCategories } from '../Api/quizAPI';
 
 const QuizOptions = ({ startQuiz }) => {
 

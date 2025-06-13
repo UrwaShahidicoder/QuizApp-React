@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import QuizResult from '../components/QuizResult';
+import QuizResult from '../components/QuizResults';
 import QuizTimer from '../components/QuizTimer';
 import QuizQuestions from '../components/QuizQuestions';
 
