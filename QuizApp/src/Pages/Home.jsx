@@ -6,7 +6,7 @@ import QuizOptions from "../components/QuizOptions";
 
 const Home = () => {
 
-    const [quizData, setQuizData] = useState(null);
+    const [quizData, setQuizData] = useState(null); 
 
     const startQuiz = async (options) => {
         const data = await fetchQuiz(

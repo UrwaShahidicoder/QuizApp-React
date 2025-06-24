@@ -1,57 +1,50 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 const QuizTimer = ({ difficulty, questionCount, onTimeUp }) => {
-
-    // Determine the time limit based on the difficulty and question count
-
-    const getTimeLimit = () => {
-        const baseTimes = {
-            easy: 2 * 60 + 15, // 2 minutes 15 seconds
-            medium: 3 * 60, // 3 minutes
-            hard: 3 * 60 + 45, // 3 minutes 45 seconds
-        };
-
-        const additionalTimePerQuestion = 20; // 20 seconds per question over 10
-        const baseTime = baseTimes[difficulty] || baseTimes.easy;
-
-        // If the question count is greater than 10, add additional time
-        if (questionCount > 10) {
-            const extraTime = (questionCount - 10) * additionalTimePerQuestion;
-            return baseTime + extraTime;
-        }
-
-        return baseTime;
+  const getTimeLimit = () => {
+    const baseTimes = {
+      easy: 135, // 2 min 15 sec
+      medium: 180,
+      hard: 225,
     };
+    const extraTime = Math.max(0, questionCount - 10) * 20;
+    return (baseTimes[difficulty] || baseTimes.easy) + extraTime;
+  };
 
-    const [timeLeft, setTimeLeft] = useState(getTimeLimit());
+  const [timeLeft, setTimeLeft] = useState(getTimeLimit());
+  const [timeLimit, setTimeLimit] = useState(getTimeLimit());
 
-    // update the time left seconds
+  useEffect(() => {
+    if (timeLeft === 0) {
+      onTimeUp();
+      return;
+    }
+    const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [timeLeft]);
 
-    useEffect(() => {
-        if (timeLeft === 0) {
-            onTimeUp();
-            return;
-        }
-        const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-        return () => clearTimeout(timer);
-    }, [timeLeft]);
+  const formatTime = (s) => {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+  };
 
-    // format the time left
-    const formatTime = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-    };
+  const progressPercent = ((timeLimit - timeLeft) / timeLimit) * 100;
 
-    return (
-        <div className='text-neutral-100 font-medium text-lg'>
-            <p className="">
-                Time Left: {" "}
-                <span className="font-semibold">{formatTime(timeLeft)}</span>
-            </p>
+  return (
+    <div className="w-full px-4 sm:px-6 md:px-8">
+      <p className="text-base sm:text-lg md:text-xl text-neutral-100 font-medium text-center mb-2">
+        Time Left:{' '}
+        <span className="font-semibold text-blue-400">{formatTime(timeLeft)}</span>
+      </p>
+      <div className="w-full h-3 bg-neutral-800 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-blue-600 transition-all duration-1000 ease-linear"
+          style={{ width: `${progressPercent}%` }}
+        ></div>
+      </div>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default QuizTimer
+export default QuizTimer;
