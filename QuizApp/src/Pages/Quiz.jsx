@@ -57,8 +57,8 @@ const Quiz = ({ questions }) => {
     };
 
     return (
-        <div className='w-[80%] -space-y-4 px-36 flex items-center justify-center flex-col z-20 relative'>
-            <div className="w-full p-6 space-y-4 bg-neutral-600/20 border border-neutral-100/20 backdrop-blur rounded-xl">
+        <div className='w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-36 flex items-center justify-center flex-col z-20 relative'>
+            <div className="w-full p-4 sm:p-6 space-y-4 bg-neutral-600/20 border border-neutral-100/20 backdrop-blur rounded-xl">
                 {/* Quiz Timer */}
                 <QuizTimer
                     difficulty={questions[currentQuestion].difficulty}
@@ -76,7 +76,7 @@ const Quiz = ({ questions }) => {
 
                 {/* Button */}
                 <button
-                    className="bg-blue-600 text-neutral-50 text-base font-medium px-8 py-3 rounded-lg hover:bg-blue-700 ease-in-out duration-300"
+                    className="bg-blue-600 text-neutral-50 text-sm sm:text-base font-medium px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg hover:bg-blue-700 ease-in-out duration-300 w-full sm:w-auto"
                     onClick={handleNext}
                 >
                     {currentQuestion < questions.length - 1 ? "Next" : "Submit"}

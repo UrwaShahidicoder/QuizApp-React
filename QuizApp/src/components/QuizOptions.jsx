@@ -67,9 +67,9 @@ const QuizOptions = ({ startQuiz }) => {
             Select Difficulty Level
           </p>
           <select
-            name="level"
+            name="difficulty"
             value={options.difficulty}
-            onChange={(e) => setDifficulty(e.target.value)}
+            onChange={handleChange}
             className="block w-full h-12 p-2 bg-neutral-200 border border-neutral-200 rounded-lg focus:border-blue-600 outline-none"
           >
             <option value="easy">Easy</option>
@@ -85,7 +85,7 @@ const QuizOptions = ({ startQuiz }) => {
           <select
             name="type"
             value={options.type}
-            onChange={(e) => setType(e.target.value)}
+            onChange={handleChange}
             className="block w-full h-12 p-2 bg-neutral-200 border border-neutral-200 rounded-lg focus:border-blue-600 outline-none"
           >
             <option value="multiple">Multiple Choice</option>
@@ -101,7 +101,7 @@ const QuizOptions = ({ startQuiz }) => {
             type="number"
             name="amount"
             value={options.amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={handleChange}
             className="block w-full h-12 p-2 bg-neutral-200 border border-neutral-200 rounded-lg focus:border-blue-600 outline-none"
             min="1"
             max="50"
